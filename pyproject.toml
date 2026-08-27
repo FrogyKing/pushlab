@@ -1,0 +1,49 @@
+[project]
+name = "pushlab"
+version = "0.1.0"
+description = "GPU-Accelerated Robust Reinforcement Learning for Quadruped Disturbance Rejection"
+readme = "README.md"
+authors = [
+    { name = "Luis Gonzalez", email = "luisgonzalezalvarez991@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.162.0",
+    "jax>=0.12.0.1",
+    "matplotlib>=3.11.2",
+    "modal>=1.6.2",
+    "mujoco>=3.17.0",
+    "mujoco-mjx>=3.17.0",
+    "numpy>=2.5.4",
+    "optax>=0.2.8",
+    "pydantic>=2.14.1",
+    "scipy>=1.18.1",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+pushlab = "pushlab:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "ruff>=0.17.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
