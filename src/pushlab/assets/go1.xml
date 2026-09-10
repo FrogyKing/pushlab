@@ -1,0 +1,122 @@
+<mujoco model="unitree_go1_pushlab">
+  <compiler angle="radian" coordinate="local" inertiafromgeom="true" autolimits="true"/>
+
+  <option timestep="0.005" gravity="0 0 -9.81" integrator="Euler" iterations="6" ls_iterations="6">
+    <flag eulerdamp="disable"/>
+  </option>
+
+  <custom>
+    <numeric data="12" name="max_contact_points"/>
+    <numeric data="12" name="max_geom_pairs"/>
+  </custom>
+
+  <default>
+    <joint damping="1.2" armature="0.015" frictionloss="0.02"/>
+    <geom condim="3" contype="0" conaffinity="0" friction="0.9 0.02 0.001" solref="0.018 1.0" solimp="0.9 0.95 0.001"/>
+    <motor ctrllimited="true" ctrlrange="-28.0 28.0"/>
+  </default>
+
+  <asset>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.11 0.13 0.17" rgb2="0.15 0.18 0.23" markrgb="0.24 0.29 0.36" width="512" height="512"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="4 4" reflectance="0.12"/>
+    <material name="trunk_mat" rgba="0.18 0.22 0.28 1"/>
+    <material name="accent_mat" rgba="0.16 0.58 0.96 1"/>
+    <material name="leg_mat" rgba="0.28 0.33 0.40 1"/>
+    <material name="foot_mat" rgba="0.95 0.55 0.15 1"/>
+  </asset>
+
+  <worldbody>
+    <light directional="true" diffuse="0.85 0.85 0.9" specular="0.3 0.3 0.3" pos="0 0 4" dir="0 0 -1" castshadow="true"/>
+    <geom name="floor" type="plane" size="40 40 0.1" material="groundplane" contype="1" conaffinity="1" friction="0.95 0.02 0.001"/>
+
+    <body name="trunk" pos="0 0 0.315">
+      <freejoint name="root"/>
+      <geom name="trunk_col" type="box" size="0.188 0.065 0.055" density="780" material="trunk_mat" contype="1" conaffinity="1"/>
+      <geom name="trunk_visor" type="box" size="0.035 0.052 0.032" pos="0.175 0 0.015" density="10" material="accent_mat"/>
+      <site name="imu" pos="0 0 0" size="0.01"/>
+
+      <!-- Front Left Leg (FL) -->
+      <body name="FL_hip" pos="0.188 0.065 0">
+        <joint name="FL_hip_joint" type="hinge" axis="1 0 0" range="-0.80 0.80"/>
+        <geom name="FL_hip_geom" type="cylinder" size="0.036 0.032" pos="0 0.04 0" euler="1.5708 0 0" density="450" material="accent_mat"/>
+        <body name="FL_thigh" pos="0 0.08 0">
+          <joint name="FL_thigh_joint" type="hinge" axis="0 1 0" range="-0.60 2.40"/>
+          <geom name="FL_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.024" density="520" material="leg_mat"/>
+          <body name="FL_calf" pos="0 0 -0.213">
+            <joint name="FL_calf_joint" type="hinge" axis="0 1 0" range="-2.60 -0.80"/>
+            <geom name="FL_calf_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.018" density="420" material="leg_mat"/>
+            <geom name="FL_foot" type="sphere" pos="0 0 -0.213" size="0.024" density="300" material="foot_mat" contype="1" conaffinity="1"/>
+            <site name="FL_foot_site" pos="0 0 -0.213" size="0.01"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- Front Right Leg (FR) -->
+      <body name="FR_hip" pos="0.188 -0.065 0">
+        <joint name="FR_hip_joint" type="hinge" axis="1 0 0" range="-0.80 0.80"/>
+        <geom name="FR_hip_geom" type="cylinder" size="0.036 0.032" pos="0 -0.04 0" euler="1.5708 0 0" density="450" material="accent_mat"/>
+        <body name="FR_thigh" pos="0 -0.08 0">
+          <joint name="FR_thigh_joint" type="hinge" axis="0 1 0" range="-0.60 2.40"/>
+          <geom name="FR_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.024" density="520" material="leg_mat"/>
+          <body name="FR_calf" pos="0 0 -0.213">
+            <joint name="FR_calf_joint" type="hinge" axis="0 1 0" range="-2.60 -0.80"/>
+            <geom name="FR_calf_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.018" density="420" material="leg_mat"/>
+            <geom name="FR_foot" type="sphere" pos="0 0 -0.213" size="0.024" density="300" material="foot_mat" contype="1" conaffinity="1"/>
+            <site name="FR_foot_site" pos="0 0 -0.213" size="0.01"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- Rear Left Leg (RL) -->
+      <body name="RL_hip" pos="-0.188 0.065 0">
+        <joint name="RL_hip_joint" type="hinge" axis="1 0 0" range="-0.80 0.80"/>
+        <geom name="RL_hip_geom" type="cylinder" size="0.036 0.032" pos="0 0.04 0" euler="1.5708 0 0" density="450" material="accent_mat"/>
+        <body name="RL_thigh" pos="0 0.08 0">
+          <joint name="RL_thigh_joint" type="hinge" axis="0 1 0" range="-0.60 2.40"/>
+          <geom name="RL_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.024" density="520" material="leg_mat"/>
+          <body name="RL_calf" pos="0 0 -0.213">
+            <joint name="RL_calf_joint" type="hinge" axis="0 1 0" range="-2.60 -0.80"/>
+            <geom name="RL_calf_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.018" density="420" material="leg_mat"/>
+            <geom name="RL_foot" type="sphere" pos="0 0 -0.213" size="0.024" density="300" material="foot_mat" contype="1" conaffinity="1"/>
+            <site name="RL_foot_site" pos="0 0 -0.213" size="0.01"/>
+          </body>
+        </body>
+      </body>
+
+      <!-- Rear Right Leg (RR) -->
+      <body name="RR_hip" pos="-0.188 -0.065 0">
+        <joint name="RR_hip_joint" type="hinge" axis="1 0 0" range="-0.80 0.80"/>
+        <geom name="RR_hip_geom" type="cylinder" size="0.036 0.032" pos="0 -0.04 0" euler="1.5708 0 0" density="450" material="accent_mat"/>
+        <body name="RR_thigh" pos="0 -0.08 0">
+          <joint name="RR_thigh_joint" type="hinge" axis="0 1 0" range="-0.60 2.40"/>
+          <geom name="RR_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.024" density="520" material="leg_mat"/>
+          <body name="RR_calf" pos="0 0 -0.213">
+            <joint name="RR_calf_joint" type="hinge" axis="0 1 0" range="-2.60 -0.80"/>
+            <geom name="RR_calf_geom" type="capsule" fromto="0 0 0 0 0 -0.213" size="0.018" density="420" material="leg_mat"/>
+            <geom name="RR_foot" type="sphere" pos="0 0 -0.213" size="0.024" density="300" material="foot_mat" contype="1" conaffinity="1"/>
+            <site name="RR_foot_site" pos="0 0 -0.213" size="0.01"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="FL_hip_motor" joint="FL_hip_joint"/>
+    <motor name="FL_thigh_motor" joint="FL_thigh_joint"/>
+    <motor name="FL_calf_motor" joint="FL_calf_joint"/>
+    <motor name="FR_hip_motor" joint="FR_hip_joint"/>
+    <motor name="FR_thigh_motor" joint="FR_thigh_joint"/>
+    <motor name="FR_calf_motor" joint="FR_calf_joint"/>
+    <motor name="RL_hip_motor" joint="RL_hip_joint"/>
+    <motor name="RL_thigh_motor" joint="RL_thigh_joint"/>
+    <motor name="RL_calf_motor" joint="RL_calf_joint"/>
+    <motor name="RR_hip_motor" joint="RR_hip_joint"/>
+    <motor name="RR_thigh_motor" joint="RR_thigh_joint"/>
+    <motor name="RR_calf_motor" joint="RR_calf_joint"/>
+  </actuator>
+
+  <keyframe>
+    <key name="home" qpos="0 0 0.315 1 0 0 0 0 0.80 -1.55 0 0.80 -1.55 0 0.80 -1.55 0 0.80 -1.55" ctrl="0 0 0 0 0 0 0 0 0 0 0 0"/>
+  </keyframe>
+</mujoco>
