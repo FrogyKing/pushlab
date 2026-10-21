@@ -1,0 +1,66 @@
+{
+  "total_runtime_seconds": 319.977,
+  "total_timesteps": 5656576,
+  "jobs": [
+    {
+      "job_id": "modal-83ec022bb7",
+      "job_name": "modal_gpu_smoke_test",
+      "gpu_type": "L4",
+      "started_at_utc": "2026-10-01T19:14:44.741032+00:00",
+      "finished_at_utc": "2026-10-01T19:15:25.279067+00:00",
+      "runtime_seconds": 40.538,
+      "total_timesteps": 4096,
+      "throughput_fps": 101.0,
+      "status": "smoke_test",
+      "notes": "GPU=NVIDIA L4, 23034 MiB | backend=gpu | steps=4096"
+    },
+    {
+      "job_id": "modal-d2f400ab17",
+      "job_name": "train_baseline_ppo_stage1",
+      "gpu_type": "L4",
+      "started_at_utc": "2026-10-01T21:02:06.660900+00:00",
+      "finished_at_utc": "2026-10-01T21:02:55.978292+00:00",
+      "runtime_seconds": 49.317,
+      "total_timesteps": 983040,
+      "throughput_fps": 19933.1,
+      "status": "completed",
+      "notes": "GPU=NVIDIA L4, 23034 MiB | backend=gpu | steps=983040"
+    },
+    {
+      "job_id": "modal-8d518bd31f",
+      "job_name": "train_robust_ppo_stage1",
+      "gpu_type": "L4",
+      "started_at_utc": "2026-10-02T18:14:42.265414+00:00",
+      "finished_at_utc": "2026-10-02T18:15:49.857905+00:00",
+      "runtime_seconds": 67.592,
+      "total_timesteps": 983040,
+      "throughput_fps": 14543.7,
+      "status": "completed",
+      "notes": "GPU=NVIDIA L4, 23034 MiB | backend=gpu | steps=1843200"
+    },
+    {
+      "job_id": "modal-a3503ab7d5",
+      "job_name": "train_baseline_ppo_final",
+      "gpu_type": "L4",
+      "started_at_utc": "2026-10-03T20:07:10.189598+00:00",
+      "finished_at_utc": "2026-10-03T20:08:28.343284+00:00",
+      "runtime_seconds": 78.153,
+      "total_timesteps": 1843200,
+      "throughput_fps": 23584.5,
+      "status": "completed",
+      "notes": "GPU=NVIDIA L4, 23034 MiB | backend=gpu | steps=1843200"
+    },
+    {
+      "job_id": "modal-f082e30ec1",
+      "job_name": "train_robust_ppo_final",
+      "gpu_type": "L4",
+      "started_at_utc": "2026-10-04T19:08:43.814384+00:00",
+      "finished_at_utc": "2026-10-04T19:10:08.192004+00:00",
+      "runtime_seconds": 84.377,
+      "total_timesteps": 1843200,
+      "throughput_fps": 21844.8,
+      "status": "completed",
+      "notes": "GPU=NVIDIA L4, 23034 MiB | backend=gpu | steps=1843200"
+    }
+  ]
+}
